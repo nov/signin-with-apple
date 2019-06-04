@@ -1,1 +1,5 @@
-<code><%= @id_token.pretty_generate.html_safe %></code>
+<section class="id_token">
+  <% @id_token.pretty_generate.each do |component| %>
+    <pre><%= component.html_safe %></pre>
+  <% end %>
+</section>
