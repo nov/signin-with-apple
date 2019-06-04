@@ -11,16 +11,11 @@
 
   <body>
     <div id="wrapper">
-      <h1>Sign-in with Apple</h1>
+      <h1><%= link_to 'Sign-in with Apple', root_path %></h1>
       <section id="main">
         <%= yield %>
       </section>
       <footer id="footer">
-        <% if session[:id_token] %>
-          <%= form_tag session_path, method: :delete do %>
-            <p><%= submit_tag :logout %></p>
-          <% end %>
-        <% end %>
         <p>
           <small>&copy; <%= link_to 'Nov Matake', 'https://matake.jp' %></small> |
           <%= link_to 'Source Code', 'https://github.com/nov/signin-with-apple' %>

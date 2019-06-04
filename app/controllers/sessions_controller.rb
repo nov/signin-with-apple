@@ -27,10 +27,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    session.delete :id_token
-  end
-
   private
 
   def client
