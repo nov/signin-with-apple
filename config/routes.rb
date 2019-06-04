@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resource :session, only: [:show, :create]
+  get 'callback', to: 'sessions#create'
+  root to: 'sessions#new'
 end
