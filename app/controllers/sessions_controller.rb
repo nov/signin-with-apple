@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   def show
-
+    if session[:id_token]
+      @id_token = JSON::JWT.new session[:id_token], :skip_verification
+    else
+      redirect_to root_url
+    end
   end
 
   def new
@@ -9,9 +13,17 @@ class SessionsController < ApplicationController
   def create
     case
     when request.post?
-      redirect_to client.authorization_uri
+      session[:state] = SecureRandom.hex(8)
+      redirect_to client.authorization_uri(
+        state: session[:state]
+      )
+    when params[:code] && session[:state] == params[:state]
+      client.authorization_code = params[:code]
+      token_response = client.access_token!
+      session[:id_token] = token_response.id_token
+      redirect_to session_url
     else
-
+      redirect_to root_url
     end
   end
 
