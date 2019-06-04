@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
   def show
     if session[:id_token]
-      id_token = JSON::JWT.decode session[:id_token], :skip_verification
-      render plain: id_token.pretty_generate
+      @id_token = JSON::JWT.decode session[:id_token], :skip_verification
     else
       redirect_to root_url
     end
@@ -26,6 +25,10 @@ class SessionsController < ApplicationController
     else
       redirect_to root_url
     end
+  end
+
+  def destroy
+    session.delete :id_token
   end
 
   private
