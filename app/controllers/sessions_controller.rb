@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       client.authorization_code = params[:code]
       token_response = client.access_token!
       token_response.id_token.verify! client, access_token: token_response.access_token
-      session[:id_token] = token_response.id_token.original_jwt
+      session[:id_token] = token_response.id_token.original_jwt.to_s
       redirect_to session_url
     else
       redirect_to root_url
