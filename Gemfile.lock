@@ -45,8 +45,8 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     aes_key_wrap (1.0.1)
-    apple_id (0.1.0)
-      openid_connect (~> 1.0)
+    apple_id (0.2.0)
+      openid_connect (~> 1.1.7)
       rack-oauth2 (~> 1.9.3)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
@@ -119,7 +119,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-    openid_connect (1.1.6)
+    openid_connect (1.1.7)
       activemodel
       attr_required (>= 1.0.0)
       json-jwt (>= 1.5.0)
@@ -237,7 +237,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  apple_id (~> 0.1.0)
+  apple_id (~> 0.2.0)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
