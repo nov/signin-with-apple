@@ -15,25 +15,7 @@ class SessionsController < ApplicationController
 
   def create
     case
-<<<<<<< HEAD
-    when request.post?
-      session[:state] = SecureRandom.hex(8)
-      redirect_to client.authorization_uri(
-        state: session[:state]
-      )
-    when params[:code] && session[:state] == params[:state]
-      client.authorization_code = params[:code]
-      token_response = client.access_token!
-      token_response.id_token.verify!(
-        client: client,
-        access_token: token_response.access_token
-      )
-      session[:id_token] = token_response.id_token.original_jwt.to_s
-      redirect_to session_url
-    else
-=======
     when params[:error].present?
->>>>>>> play with apple js sdk
       redirect_to root_url
     when params[:code].present? && session[:state] == params[:state]
       receive_authorization_response
