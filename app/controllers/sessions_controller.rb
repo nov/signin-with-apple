@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  before_filter :setup_state, only: :new
-  before_filter :setup_client, only: :create
+  before_action :setup_state, only: :new
+  before_action :setup_client, only: :create
 
   def show
     if session[:id_token]
