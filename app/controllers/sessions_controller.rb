@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   before_action :setup_state, only: :new
-  before_action :setup_client, only: :create
+  before_action :setup_client, only: [:create, :callback]
+  skip_before_action :verify_authenticity_token, only: :callback
 
   def show
     if session[:id_token]
@@ -14,13 +15,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-    case
-    when params[:error].present?
-      redirect_to root_url
-    when params[:code].present? && session[:state] == params[:state]
-      receive_authorization_response
+    redirect_to @client.authorization_uri(
+      scope: [:email, :name],
+      state: session[:state]
+    )
+  end
+
+  def callback
+    if params[:code].present? && session[:state] == params[:state]
+      @client.authorization_code = params[:code]
+      token_response = @client.access_token!
+      token_response.id_token.verify!(
+        client: @client,
+        access_token: token_response.access_token
+      )
+      session[:id_token] = token_response.id_token.original_jwt.to_s
+      redirect_to session_url
     else
-      send_authorization_request
+      redirect_to root_url
     end
   end
 
@@ -38,23 +50,5 @@ class SessionsController < ApplicationController
 
   def setup_state
     session[:state] = SecureRandom.hex(8)
-  end
-
-  def send_authorization_request
-    redirect_to @client.authorization_uri(
-      scope: [:email, :name],
-      state: session[:state]
-    )
-  end
-
-  def receive_authorization_response
-    @client.authorization_code = params[:code]
-    token_response = @client.access_token!
-    token_response.id_token.verify!(
-      client: @client,
-      access_token: token_response.access_token
-    )
-    session[:id_token] = token_response.id_token.original_jwt.to_s
-    redirect_to session_url
   end
 end
