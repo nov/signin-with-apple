@@ -7,6 +7,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <meta name="appleid-signin-client-id" content="<%= ENV['CLIENT_ID'] %>">
+    <meta name="appleid-signin-scope" content="email name">
+    <meta name="appleid-signin-redirect-uri" content="<%= ENV['REDIRECT_URI'] %>">
+    <meta name="appleid-signin-state" content="<%= session[:state] %>">
+    <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
   </head>
 
   <body>
