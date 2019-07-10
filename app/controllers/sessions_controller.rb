@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
   def create
     redirect_to @client.authorization_uri(
       scope: [:email, :name],
-      state: session[:state]
+      state: session[:state],
+      nonce: session[:nonce]
     )
   end
 
@@ -50,5 +51,6 @@ class SessionsController < ApplicationController
 
   def setup_state
     session[:state] = SecureRandom.hex(8)
+    session[:nonce] = SecureRandom.hex(8)
   end
 end
