@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
       token_response.id_token.verify!(
         client: @client,
         access_token: token_response.access_token,
-        nonce: session.delete(:nonce)
+        # nonce: session.delete(:nonce) # NOTE: JS SDK isn't supporting nonce yet.
       )
       session[:id_token] = token_response.id_token.original_jwt.to_s
       redirect_to session_url
