@@ -10,3 +10,11 @@
 
 <div id="appleid-signin"></div>
 <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+
+<%= content_for :head %>
+  <meta name="appleid-signin-client-id" content="<%= ENV['CLIENT_ID'] %>">
+  <meta name="appleid-signin-scope" content="email name">
+  <meta name="appleid-signin-redirect-uri" content="<%= ENV['REDIRECT_URI'] %>">
+  <meta name="appleid-signin-state" content="<%= session[:state] %>">
+  <meta name="appleid-signin-nonce" content="<%= session[:nonce] %>">
+<% end %>

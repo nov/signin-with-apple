@@ -23,12 +23,13 @@ class SessionsController < ApplicationController
   end
 
   def callback
-    if params[:code].present? && session[:state] == params[:state]
+    if params[:code].present? && session.delete(:state) == params[:state]
       @client.authorization_code = params[:code]
       token_response = @client.access_token!
       token_response.id_token.verify!(
         client: @client,
-        access_token: token_response.access_token
+        access_token: token_response.access_token,
+        nonce: session.delete(:nonce)
       )
       session[:id_token] = token_response.id_token.original_jwt.to_s
       redirect_to session_url

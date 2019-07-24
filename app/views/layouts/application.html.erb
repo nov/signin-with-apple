@@ -8,10 +8,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <meta name="appleid-signin-client-id" content="<%= ENV['CLIENT_ID'] %>">
-    <meta name="appleid-signin-scope" content="email name">
-    <meta name="appleid-signin-redirect-uri" content="<%= ENV['REDIRECT_URI'] %>">
-    <meta name="appleid-signin-state" content="<%= session[:state] %>">
+    <%= yield :head %>
   </head>
 
   <body>
