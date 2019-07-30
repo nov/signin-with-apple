@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def new
+    reset_session
   end
 
   def create
