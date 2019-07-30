@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
   end
 
   def new
-    reset_session
   end
 
   def create
@@ -56,6 +55,7 @@ class SessionsController < ApplicationController
   end
 
   def setup_state
+    reset_session
     session[:state] = SecureRandom.hex(8)
     session[:nonce] = SecureRandom.hex(8)
   end
