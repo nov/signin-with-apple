@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
   def show
     if session[:id_token_back_channel]
       @id_token_back_channel = JSON::JWT.decode session[:id_token_back_channel], :skip_verification
-      @id_token_front_channel = JSON::JWT.decode session[:id_token_front_channel], :skip_verification
+      if session[:id_token_front_channel]
+        @id_token_front_channel = JSON::JWT.decode session[:id_token_front_channel], :skip_verification
+      end
     else
       redirect_to root_url
     end
