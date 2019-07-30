@@ -5,11 +5,11 @@
   <% end %>
 </section>
 
-<section class="id_token">
-  <h2>ID Token Front Channel</h2>
-  <% if @id_token_front_channel %>
+<% if @id_token_front_channel %>
+  <section class="id_token">
+    <h2>ID Token Front Channel</h2>
     <% @id_token_front_channel.pretty_generate.each do |component| %>
       <pre><%= component.html_safe %></pre>
     <% end %>
-  <% end %>
-</section>
+  </section>
+<% end %>
