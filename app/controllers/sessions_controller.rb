@@ -4,8 +4,9 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :callback
 
   def show
-    if session[:id_token]
-      @id_token = JSON::JWT.decode session[:id_token], :skip_verification
+    if session[:id_token_back_channel]
+      @id_token_back_channel = JSON::JWT.decode session[:id_token_back_channel], :skip_verification
+      @id_token_front_channel = JSON::JWT.decode session[:id_token_front_channel], :skip_verification
     else
       redirect_to root_url
     end
@@ -31,7 +32,8 @@ class SessionsController < ApplicationController
         access_token: token_response.access_token,
         # nonce: session.delete(:nonce) # NOTE: JS SDK isn't supporting nonce yet.
       )
-      session[:id_token] = token_response.id_token.original_jwt.to_s
+      session[:id_token_back_channel] = token_response.id_token.original_jwt.to_s
+      session[:id_token_front_channel] = params[:id_token]
       redirect_to session_url
     else
       redirect_to root_url
