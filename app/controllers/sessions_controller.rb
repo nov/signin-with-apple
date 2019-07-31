@@ -27,15 +27,25 @@ class SessionsController < ApplicationController
 
   def callback
     if params[:code].present? && session.delete(:state) == params[:state]
+      expected_nonce = session.delete(:nonce)
       @client.authorization_code = params[:code]
       token_response = @client.access_token!
-      token_response.id_token.verify!(
+      id_token_back_channel = token_response.id_token
+      id_token_back_channel.verify!(
         client: @client,
         access_token: token_response.access_token,
-        # nonce: session.delete(:nonce) # NOTE: JS SDK isn't supporting nonce yet.
+        # nonce: expected_nonce # NOTE: JS SDK isn't supporting nonce yet.
       )
-      session[:id_token_back_channel] = token_response.id_token.original_jwt.to_s
-      session[:id_token_front_channel] = params[:id_token]
+      session[:id_token_back_channel] = id_token_back_channel.original_jwt.to_s
+      if params[:id_token].present?
+        id_token_front_channel = AppleID::IdToken.decode params[:id_token]
+        id_token_front_channel.verify!(
+          client: @client,
+          code: params[:code],
+          # nonce: expected_nonce # NOTE: JS SDK isn't supporting nonce yet.
+        )
+        session[:id_token_front_channel] = id_token_front_channel.original_jwt.to_s
+      end
       redirect_to session_url
     else
       redirect_to root_url
