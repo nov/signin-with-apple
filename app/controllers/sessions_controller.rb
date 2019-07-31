@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
     redirect_to @client.authorization_uri(
       scope: [:email, :name],
       state: session[:state],
-      nonce: session[:nonce]
+      nonce: session[:nonce],
+      response_mode: :form_post
     )
   end
 
