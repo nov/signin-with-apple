@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
       scope: [:email, :name],
       state: session[:state],
       nonce: session[:nonce],
+      response_type: [:code, :id_token],
       response_mode: :form_post
     )
   end
