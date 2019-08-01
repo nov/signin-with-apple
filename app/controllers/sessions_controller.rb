@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
         id_token_front_channel = AppleID::IdToken.decode params[:id_token]
         id_token_front_channel.verify!(
           client: @client,
-          # code: params[:code],
+          code: params[:code],
           # nonce: expected_nonce # NOTE: JS SDK isn't supporting nonce yet.
         )
         session[:id_token_front_channel] = id_token_front_channel.original_jwt.to_s
