@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       state: session[:state],
       nonce: session[:nonce],
       response_type: [:code, :id_token],
-      response_mode: :form_post
+      # response_mode: :form_post
     )
   end
 
