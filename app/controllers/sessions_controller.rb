@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
       id_token_back_channel.verify!(
         client: @client,
         access_token: token_response.access_token,
-        # nonce: expected_nonce # NOTE: JS SDK isn't supporting nonce yet.
+        nonce: expected_nonce
       )
       session[:id_token_back_channel] = id_token_back_channel.original_jwt.to_s
       if params[:id_token].present?
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
         id_token_front_channel.verify!(
           client: @client,
           code: params[:code],
-          # nonce: expected_nonce # NOTE: JS SDK isn't supporting nonce yet.
+          nonce: expected_nonce
         )
         session[:id_token_front_channel] = id_token_front_channel.original_jwt.to_s
       end
