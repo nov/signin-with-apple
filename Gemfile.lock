@@ -59,9 +59,9 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     aes_key_wrap (1.0.1)
-    apple_id (0.5.0)
+    apple_id (0.6.0)
       openid_connect (~> 1.1.7)
-      rack-oauth2 (~> 1.11)
+      rack-oauth2 (~> 1.12)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     attr_required (1.0.1)
@@ -144,13 +144,13 @@ GEM
     pg (1.2.3)
     public_suffix (4.0.3)
     puma (3.12.4)
-    rack (2.2.2)
-    rack-oauth2 (1.11.0)
+    rack (2.0.9)
+    rack-oauth2 (1.12.0)
       activesupport
       attr_required
       httpclient
       json-jwt (>= 1.11.0)
-      rack (>= 2.1.0)
+      rack (< 2.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.2.2)
@@ -251,7 +251,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  apple_id (>= 0.5)
+  apple_id (>= 0.6)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
