@@ -19,12 +19,12 @@ class SessionsController < ApplicationController
 
   def create
     redirect_to @client.authorization_uri(
-      # scope: [:email, :name],
+      scope: [:email, :name],
       state: session[:state],
       nonce: session[:nonce],
-      response_type: :code,
-      # response_type: [:code, :id_token],
-      # response_mode: :form_post
+      # response_type: :code,
+      response_type: [:code, :id_token],
+      response_mode: :form_post
     )
   end
 
