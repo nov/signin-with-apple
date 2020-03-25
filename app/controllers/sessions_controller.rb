@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       # response_type: :code,
       response_type: [:code, :id_token],
       response_mode: :form_post
-    ).gsub('+', '%20')
+    )
   end
 
   def callback
