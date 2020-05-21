@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'apple_id', '>= 1.0'
+gem 'rack-oauth2', '1.13.0.beta'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
