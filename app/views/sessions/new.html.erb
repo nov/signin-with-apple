@@ -17,9 +17,9 @@
 </script>
 
 <%= content_for :head do %>
-  <meta name="appleid-signin-client-id" content="net.zexy.koimusubi.ios.signinwithapple">
+  <meta name="appleid-signin-client-id" content="<%= ENV['CLIENT_ID'] %>">
   <meta name="appleid-signin-scope" content="email name">
-  <meta name="appleid-signin-redirect-uri" content="https://zexy-koimusubi.net/web/auth/apple_login/callback">
+  <meta name="appleid-signin-redirect-uri" content="<%= ENV['REDIRECT_URI'] %>">
   <meta name="appleid-signin-state" content="<%= session[:state] %>">
   <meta name="appleid-signin-nonce" content="<%= session[:nonce] %>">
   <meta name="appleid-signin-use-popup" content="<%= params[:popup] %>">
