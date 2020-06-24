@@ -144,7 +144,7 @@ GEM
     pg (1.2.3)
     public_suffix (4.0.5)
     puma (3.12.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-oauth2 (1.13.0.beta)
       activesupport
       attr_required
