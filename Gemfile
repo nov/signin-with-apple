@@ -38,6 +38,8 @@ gem 'rack-oauth2', '1.13.0.beta'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'net-smtp', require: false
+gem 'net-pop',  require: false
+gem 'net-imap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
