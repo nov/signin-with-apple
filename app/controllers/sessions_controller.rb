@@ -28,6 +28,13 @@ class SessionsController < ApplicationController
     )
   end
 
+  def destroy
+    refresh_token = RefreshToken.find(session[:refresh_token])
+    @client.refresh_token = refresh_token
+    @client.revoke!
+    redirect_to root_url
+  end
+
   def callback
     if params[:code].present? && session.delete(:state) == params[:state]
       expected_nonce = session.delete(:nonce)
@@ -39,6 +46,7 @@ class SessionsController < ApplicationController
         access_token: token_response.access_token,
         nonce: expected_nonce
       )
+      session[:refresh_token] = efreshToken.create!(token: token_response.refresh_token).id
       session[:id_token_back_channel] = id_token_back_channel.original_jwt.to_s
       if params[:id_token].present?
         id_token_front_channel = AppleID::IdToken.decode params[:id_token]
