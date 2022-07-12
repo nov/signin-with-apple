@@ -63,9 +63,9 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     aes_key_wrap (1.1.0)
-    apple_id (1.1.1)
-      openid_connect (~> 1.1.7)
-      rack-oauth2 (~> 1.12)
+    apple_id (1.3.0)
+      openid_connect (~> 1.3.0)
+      rack-oauth2 (~> 1.21)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     attr_required (1.0.1)
@@ -151,7 +151,7 @@ GEM
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    openid_connect (1.1.8)
+    openid_connect (1.3.0)
       activemodel
       attr_required (>= 1.0.0)
       json-jwt (>= 1.5.0)
@@ -167,7 +167,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
-    rack-oauth2 (1.13.0.beta)
+    rack-oauth2 (1.21.0)
       activesupport
       attr_required
       httpclient
@@ -277,7 +277,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  apple_id (>= 1.0)
+  apple_id (~> 1.3)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
@@ -291,7 +291,7 @@ DEPENDENCIES
   net-smtp
   pg
   puma
-  rack-oauth2 (= 1.13.0.beta)
+  rack-oauth2 (~> 1.21)
   rails (~> 6.0)
   sass-rails (~> 5.0)
   selenium-webdriver
