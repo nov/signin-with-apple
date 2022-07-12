@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_11_063548) do
+ActiveRecord::Schema.define(version: 2022_07_12_090025) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.text "payload", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["identifier"], name: "index_events_on_identifier", unique: true
+  end
 
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token", null: false
