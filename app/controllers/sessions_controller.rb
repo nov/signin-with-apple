@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
         access_token: token_response.access_token,
         nonce: expected_nonce
       )
-      session[:refresh_token] = efreshToken.create!(token: token_response.refresh_token).id
+      session[:refresh_token] = RefreshToken.create!(token: token_response.refresh_token).id
       session[:id_token_back_channel] = id_token_back_channel.original_jwt.to_s
       if params[:id_token].present?
         id_token_front_channel = AppleID::IdToken.decode params[:id_token]
