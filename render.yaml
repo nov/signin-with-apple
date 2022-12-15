@@ -1,0 +1,21 @@
+databases:
+  - name: signin-with-apple
+    databaseName: signin_with_apple_production
+    user: render
+    region: oregon
+
+services:
+  - type: web
+    name: signin-with-apple
+    env: ruby
+    region: oregon
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: signin_with_apple_production
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
